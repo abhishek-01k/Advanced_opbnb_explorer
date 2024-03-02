@@ -1,5 +1,9 @@
 "use client"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Home() {
 
@@ -9,13 +13,15 @@ export default function Home() {
     body: JSON.stringify({
       id: 1,
       jsonrpc: '2.0',
-      params: ['0xfaa4189086f87538f2510790296da5b436d4963b2b9f68f0c4c518fdfee1cfd5'],
-      method: 'eth_getTransactionByHash'
+      // params: ['0x24adb4e5dac9083f3041b735beadd2400eddd3a39552fcf9cad4c8a0736ad703'],
+      params: ['0xa35c21fa17229477b5536eea77de5e7c329f95f0c5388856c08d75aeb7c7911a'],
+      // method: 'eth_getTransactionByHash'
+      method: 'eth_getTransactionReceipt'
     })
   };
 
   const getDetail = async () => {
-    const res = await fetch('https://opbnb-mainnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3', options)
+    const res = await fetch('https://bsc-mainnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3', options)
       .then(response => response.json())
       .then(response => console.log(response))
       .catch(err => console.error(err));
@@ -101,6 +107,17 @@ export default function Home() {
 
   }
 
+  const [txId, setTxId] = useState<string>('');
+  const router = useRouter()
+  const handleTxSearch = () => {
+    if (!txId) return
+
+    console.log("Tx Id: " + txId);
+    console.log("router " + router);
+
+    router.push(`tx/${txId}`);
+  }
+
 
   return (
     <main className=" flex flex-col gap-4">
@@ -110,6 +127,13 @@ export default function Home() {
       <button onClick={getTxnbyHash}>Get Txn based on hash</button>
       <button onClick={getGasCost}>Get Gas cost on opbnb</button>
       <button onClick={getEthCost}>Get Gas cost on ETH</button>
+
+
+      <div className="flex w-full max-w-sm items-center space-x-2">
+        <Input onChange={(e) => setTxId(e.target.value)} type="text" placeholder="Enter Transaction" />
+        <Button onClick={handleTxSearch}>Search</Button>
+      </div>
+
     </main>
   );
 }
