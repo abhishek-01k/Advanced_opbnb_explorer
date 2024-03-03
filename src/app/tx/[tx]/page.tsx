@@ -9,23 +9,38 @@ import TransactionDetails from './TransactionDetails';
 
 const TxPage = ({ params }: any) => {
     const router = useRouter();
-    console.log("Router", router, params);
 
     const { tx } = params;
-    console.log("Tx", tx, Data);
-
 
     const [activeState, setActiveState] = useState<number>(1);
     const [data, setData] = useState(Data);
 
+    const getDetail = async (tx: string) => {
+
+        const options = {
+            method: 'POST',
+            headers: { accept: 'application/json', 'content-type': 'application/json' },
+            body: JSON.stringify({
+                id: 1,
+                jsonrpc: '2.0',
+                params: [tx],
+                method: 'eth_getTransactionReceipt'
+            })
+        };
+
+        const res = await fetch('https://bsc-mainnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3', options)
+            .then(response => response.json())
+            .then(response => {
+                setData(response.result);
+            })
+            .catch(err => console.error(err));
+    }
+
     useEffect(() => {
         if (tx) {
-
+            getDetail(tx);
         }
     }, [tx])
-
-
-    console.count();
 
     return (
         <div className="hidden space-y-6 p-10 pb-16 md:block">
@@ -37,13 +52,13 @@ const TxPage = ({ params }: any) => {
             </div>
             <Separator className="my-6" />
 
-            <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
-                <aside className="-mx-4 lg:w-1/5">
+            <div className="flex flex-row">
+                <aside className="mx-4 min-w-[150px]">
                     <Sidebar setActiveState={setActiveState} activeState={activeState} />
                 </aside>
-                <div className="flex-1 lg:max-w-2xl">
+                <div className="">
                     {activeState === 1 && <TransactionDetails data={data} />}
-                    {activeState === 2 && <LogDetails logs={data.logs} />}
+                    {activeState === 2 && <LogDetails logs={data.logs} data={data} />}
                 </div>
 
             </div>
