@@ -235,7 +235,7 @@ export default function Home() {
           <select
             onChange={handleChainChange}
             value={selectedChain}
-            className="form-select p-8"
+            className="form-select p-2 bg-gray-700 text-white text-center justify-center"
           >
             <option value="BinanceTestnet">Binance Testnet</option>\
             <option value="BinanceMainnet">Binance Mainnet</option>
