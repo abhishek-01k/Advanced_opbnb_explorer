@@ -77,12 +77,12 @@ export default function Home() {
       body: JSON.stringify({
         id: 1,
         jsonrpc: '2.0',
-        params: ['0x3d0ef470b15fbfea15122d9fb709cd02a72613704acaa43f2b168a0914d1a563'],
+        params: ['0xd9f5051f12ddf3be10b1343a9bdb70d3a0403b04db93f20287fef6e518289825'],
         method: 'eth_getTransactionByHash'
       })
     };
 
-    fetch('https://opbnb-testnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3', options)
+    fetch('https://bsc-testnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3', options)
       .then(response => response.json())
       .then(response => console.log(response))
       .catch(err => console.error(err));

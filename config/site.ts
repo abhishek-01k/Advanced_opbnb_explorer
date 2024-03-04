@@ -6,8 +6,8 @@ export const siteConfig = {
     "OPBNB Advanced Analytics Explorer",
   mainNav: [
     {
-      title: "Dashboard",
-      href: "/dashboard",
+      title: "Gas Comparison",
+      href: "/gascomparison",
     }
   ],
   links: {

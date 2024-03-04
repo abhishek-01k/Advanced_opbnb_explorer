@@ -1,4 +1,5 @@
 import { Separator } from '@/components/ui/separator';
+import { getBytes } from 'ethers';
 import React from 'react';
 
 const LogDetails = ({
@@ -6,6 +7,21 @@ const LogDetails = ({
     data
 }: any) => {
     console.log("Logs >>>>>>", logs);
+    const hex = '0x00000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000289959799e9000000000000000000000000000000000000000000000000000000000000020e28';
+
+    // Remove the '0x' prefix
+    const hexStripped = hex.slice(2);
+    
+    // Assuming 32 bytes (64 hex chars) per field
+    const nonce = parseInt(hexStripped.substring(0, 64), 16);
+    const success = parseInt(hexStripped.substring(64, 128), 16) === 1 ? true : false;
+    const actualGasCost = parseInt(hexStripped.substring(128, 192), 16);
+    const actualGasUsed = parseInt(hexStripped.substring(192, 256), 16);
+    
+    console.log(`nonce: ${nonce}`);
+    console.log(`success: ${success}`);
+    console.log(`actualGasCost: ${actualGasCost}`);
+    console.log(`actualGasUsed: ${actualGasUsed}`);
     return (
         <div>
             <div className="text-2xl font-bold tracking-tight mb-4">Transaction Receipt Event Logs</div>

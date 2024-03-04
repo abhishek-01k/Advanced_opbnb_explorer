@@ -28,7 +28,7 @@ const TxPage = ({ params }: any) => {
             })
         };
 
-        const res = await fetch('https://bsc-mainnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3', options)
+        const res = await fetch('https://bsc-testnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3', options)
             .then(response => response.json())
             .then(response => {
                 setData(response.result);
@@ -57,7 +57,7 @@ const TxPage = ({ params }: any) => {
                     <Sidebar setActiveState={setActiveState} activeState={activeState} />
                 </aside>
                 <div className="">
-                    {activeState === 1 && <TransactionDetails data={data} />}
+                    {activeState === 1 && <TransactionDetails data={data} logs={data.logs} />}
                     {activeState === 2 && <LogDetails logs={data.logs} data={data} />}
                 </div>
 
