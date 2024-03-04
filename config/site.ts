@@ -9,6 +9,7 @@ export const siteConfig = {
       title: "MonitorOPBNB",
       href: "/monitoropbnb",
     },
+    
   ],
   links: {
     twitter: "https://twitter.com/opbnbexplorer",

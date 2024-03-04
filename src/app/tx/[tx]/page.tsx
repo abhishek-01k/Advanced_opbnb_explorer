@@ -27,7 +27,7 @@ const TxPage = ({ params }: any) => {
             })
         };
 
-        const res = await fetch('https://bsc-testnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3', options)
+        const res = await fetch('https://opbnb-testnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3', options)
             .then(response => response.json())
             .then(response => {
                 console.log("Response", response);

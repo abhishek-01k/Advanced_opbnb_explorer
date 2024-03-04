@@ -8,15 +8,30 @@ Welcome to our Advanced L2 Analytics Explorer, a pioneering tool designed to tra
 
 Through our intuitive analytics dashboard, open-source block explorer, and real-time status dashboards, we aim to democratize access to information, enabling users to make informed decisions and optimize their L2 operations.
 
+![Screenshot 2024-03-11 024614](https://github.com/abhishek-01k/Advanced_opbnb_explorer/assets/95926324/93c3051f-97dc-4103-886d-5828a1f8f1aa)
+
 ### Features
 
 Salient features at the heart of this project is to revolutionize the opBNB ecosystem by integrating advanced analytics support. Our focus is on delivering a suite of tools that provide users with valuable data insights, enhancing their L2 experience. The project is structured around three main components:
 
 1. **Analytics Dashboard:** A central hub for exploring and visualizing L2 data, including gas costs, transaction speeds, and security metrics. The dashboard is designed to be intuitive and user-friendly, ensuring that users can easily access and understand the information they need.
 
+![Screenshot 2024-03-11 024818](https://github.com/abhishek-01k/Advanced_opbnb_explorer/assets/95926324/231379dd-f3f8-40ea-9949-6e406592b3e8)
+
+![Screenshot 2024-03-11 024709](https://github.com/abhishek-01k/Advanced_opbnb_explorer/assets/95926324/856226b5-e5ea-43b8-99ba-68c2d5a49ae9)
+
 2. **Open-Source Block Explorer:** This component aims to enhance transparency within the L2 ecosystem by allowing users to explore their transactions in detail. Compatibility with all rollups is a key feature, enabling our comprehensive research and exploration.
 
+![Screenshot 2024-03-11 030011](https://github.com/abhishek-01k/Advanced_opbnb_explorer/assets/95926324/2a61a51a-8ce5-41d0-86d7-a744b5811346)
+
+![Screenshot 2024-03-11 025936](https://github.com/abhishek-01k/Advanced_opbnb_explorer/assets/95926324/1ffbb72b-d266-4aff-a83b-454c47252d90)
+
 3. **Real-Time Status Dashboard:** To ensure the smooth operation of L2 activities, our status dashboard provide continuous monitoring of the opBNB network's health. These dashboards offer real-time updates on network performance, helping users to identify and address potential issues promptly.
+
+![image](https://github.com/abhishek-01k/Advanced_opbnb_explorer/assets/95926324/aed6035a-a103-4f0f-b614-778d7828d50c)
+
+![Screenshot 2024-03-11 030432](https://github.com/abhishek-01k/Advanced_opbnb_explorer/assets/95926324/ac154b01-87bc-4ef9-9374-50de79ff9c2c)
+
 
 ### Main Objectives and Goals
 

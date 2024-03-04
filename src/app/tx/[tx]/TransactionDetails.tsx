@@ -10,9 +10,8 @@ const TransactionDetails = ({ data, logs }: any) => {
   const [actualGasCost, setActualGasCost] = useState<number>();
   const [actualGasUsed, setActualGasUsed] = useState<number>();
   const [useropsender, setUseropsender] = useState<string>();
-  const [paymaster, setPaymaster] = useState<string>();
+  const [paymaster, setPaymaster] = useState<string>("");
   const [nonce, setNonce] = useState<number>();
-
 
   useEffect(() => {
     if (data && data.to === "0x5ff137d4b0fdcd49dca30c7cf57e578a026d2789") {
@@ -41,6 +40,8 @@ const TransactionDetails = ({ data, logs }: any) => {
       console.log(topics[2]);
     }
   }, [data, logs]); //
+
+  console.log(data.l1GasUsed);
 
   return (
     <div>
@@ -77,7 +78,9 @@ const TransactionDetails = ({ data, logs }: any) => {
 
         <div className="flex flex-row gap-6 justify-between">
           <p className="text-muted-foreground">Status:</p>
-          <p className="border border-gray-300 bg-green-300 px-2 py-1 rounded-lg text-gray-700">{data.status == '0x1' && "Success"}</p>
+          <p className="border border-gray-300 bg-green-300 px-2 py-1 rounded-lg text-gray-700">
+            {data.status == "0x1" && "Success"}
+          </p>
         </div>
 
         <div className="flex flex-row gap-6 justify-between">
@@ -87,8 +90,42 @@ const TransactionDetails = ({ data, logs }: any) => {
 
         <div className="flex flex-row gap-6 justify-between">
           <p className="text-muted-foreground">Gas used:</p>
-          <p>${parseInt(data?.gasUsed).toLocaleString()}</p>
+          <p>{parseInt(data?.gasUsed).toLocaleString()}</p>
         </div>
+
+        <Separator className="my-6" />
+        {data.l1Fee && (
+          <>
+            <div className="flex flex-row gap-6 justify-between">
+              <p className="text-muted-foreground">L1 Fee:</p>
+              <p>{parseInt((data.l1Fee))}</p>
+            </div>
+            <div className="flex flex-row gap-6 justify-between">
+              <p className="text-muted-foreground">L1 GasPrice:</p>
+              <p>{parseInt(data.l1GasPrice)/ 10** 9} Gwei</p>
+            </div>
+            <div className="flex flex-row gap-6 justify-between">
+              <p className="text-muted-foreground">L1 GasUsed:</p>
+              <p>{parseInt((data.l1GasUsed))}</p>
+            </div>
+            <div className="flex flex-row gap-6 justify-between">
+              <p className="text-muted-foreground">L1 cumulativeGasUsed :</p>
+              <p>{parseInt(data.cumulativeGasUsed)}</p>
+            </div>
+          </>
+        )}
+        {/* l1Fee
+: 
+"0x23abbf8bf400"
+l1FeeScalar
+: 
+"0.684"
+l1GasPrice
+: 
+"0x12a05f200"
+l1GasUsed
+: 
+"0x2ccc" */}
 
         <Separator className="my-6" />
 
@@ -112,20 +149,21 @@ const TransactionDetails = ({ data, logs }: any) => {
 
         {nonce && (
           <div className="flex flex-row gap-6 justify-between">
-            <p className="text-muted-foreground">Nonce</p>
+            <p className="text-muted-foreground">Nonce:</p>
             <p>{nonce}</p>
           </div>
         )}
+
         {useropsender && (
           <div className="flex flex-row gap-6 justify-between">
             <p className="text-muted-foreground">Sender</p>
-            <p>{useropsender}</p>
+            <p> {`0x${useropsender.slice(26)}`}</p>
           </div>
         )}
-        {paymaster != "0x0000000000000000000000000000000000000000000000000000000000000000" && (
+        {!paymaster && (
           <div className="flex flex-row gap-6 justify-between">
             <p className="text-muted-foreground">Paymaster</p>
-            <p>{paymaster}</p>
+            <p>{`0x${paymaster.slice(26)}`}</p>
           </div>
         )}
       </div>
