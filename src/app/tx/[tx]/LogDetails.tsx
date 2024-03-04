@@ -22,6 +22,7 @@ const LogDetails = ({
     console.log(`success: ${success}`);
     console.log(`actualGasCost: ${actualGasCost}`);
     console.log(`actualGasUsed: ${actualGasUsed}`);
+
     return (
         <div>
             <div className="text-2xl font-bold tracking-tight mb-4">Transaction Receipt Event Logs</div>
