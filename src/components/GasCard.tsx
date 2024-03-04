@@ -14,7 +14,6 @@ export const GasCard = () => {
     fetchGasData();
   }, []);
 
-  console.log(gasData,"gas")
   const renderGasFeeEstimate = (estimate : any, title : string) => (
     <>
       <div className="text-lg font-semibold">{title}</div>

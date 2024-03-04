@@ -5,7 +5,10 @@ export const siteConfig = {
   description:
     "OPBNB Advanced Analytics Explorer",
   mainNav: [
-
+    {
+      title: "MonitorOPBNB",
+      href: "/monitoropbnb",
+    },
   ],
   links: {
     twitter: "https://twitter.com/opbnbexplorer",

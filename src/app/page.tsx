@@ -1,15 +1,26 @@
 "use client"
 import { GasCard } from "@/components/GasCard";
-import GasComparison from "@/components/gascomparison/page";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Home() {
+  const [loading, setLoading] = useState(false);
+  const [apiResponse, setApiResponse] = useState(null);
 
-  const options = {
+
+  type Options = {
+
+    method: string;
+    headers: {
+        accept: string;
+        'content-type': string;
+    };
+    body: any;
+}
+
+  const options : Options= {
     method: 'POST',
     headers: { accept: 'application/json', 'content-type': 'application/json' },
     body: JSON.stringify({
@@ -27,14 +38,19 @@ export default function Home() {
     })
   };
 
-const iframeUrls = [
-  "https://covalent-embed.vercel.app/card_17027896cc9848ba8c905fee08e?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33",
-  "https://covalent-embed.vercel.app/card_b0fc55f2a8524c099910064ad43?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33",
-  "https://covalent-embed.vercel.app/card_c8dc0f323b1244018e0ebd1b354?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33",
-  "https://covalent-embed.vercel.app/card_fa5fc20223b748a2805c9172a86?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33",
-  "https://covalent-embed.vercel.app/card_aaec2e41b3b14158bda242b9ab8?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33",
-  "https://covalent-embed.vercel.app/card_6a63b73879a142b684ad37d2644?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33",
-];
+  const fetchApi = async (url : string, options : Options) => {
+    setLoading(true);
+    try {
+      const response = await fetch(url, options);
+      const data = await response.json();
+      setApiResponse(data);
+    } catch (error) {
+      console.error("fetch error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const getUserOpbyHash = async () => {
 
     const options = {
@@ -43,15 +59,12 @@ const iframeUrls = [
       body: JSON.stringify({
         id: 1,
         jsonrpc: '2.0',
-        params: ['0xfd0979bce8fd511b87626b06e12616bb8664b81136ded25445a0797655ec49e8'],
+        params: ['0x8482fb46ccb925569fc4efcc3d5e3fb1f4e18badaea67a46de09a475dcf86f5f'],
         method: 'eth_getUserOperationByHash'
       })
     }
 
-    const res = await fetch("https://open-platform.nodereal.io/049504cf29bf4e9a874a71a8788cdbee/particle-bundler/56", options)
-      .then(response => response.json())
-      .then(response => console.log(response))
-      .catch(err => console.error(err));
+    const res = await fetchApi("https://open-platform.nodereal.io/049504cf29bf4e9a874a71a8788cdbee/particle-bundler/97", options);
   }
 
   const getDetail = async () => {
@@ -92,10 +105,7 @@ const iframeUrls = [
       })
     };
 
-    fetch('https://bsc-testnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3', options)
-      .then(response => response.json())
-      .then(response => console.log(response))
-      .catch(err => console.error(err));
+    fetchApi('https://bsc-testnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3', options)
   }
 
   const getGasCost = () => {
@@ -157,27 +167,22 @@ const iframeUrls = [
         <Button onClick={handleTxSearch}>Search</Button>
       </div>
 
-      {/* Grid layout for iframes */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {iframeUrls.map((url, index) => (
-          <div key={index} className="rounded-lg overflow-hidden shadow-lg">
-            <iframe
-              src={url}
-              width="100%"
-              height="400"
-              style={{ border: "none" }}
-              title={`Embedded Card ${index + 1}`}
-            ></iframe>
-          </div>
-        ))}
-      </div>
+      <GasCard />
     
-      <button onClick={getUserOpbyHash}>Get User Op by hash</button>
-      <button onClick={getDetail}>Get Details</button>
-      <button onClick={getGasPrice}>Get Gas price on opbnb</button>
-      <button onClick={getTxnbyHash}>Get Txn based on hash</button>
-      <button onClick={getGasCost}>Get Gas cost on opbnb</button>
-      <button onClick={getEthCost}>Get Gas cost on ETH</button>
+      <div className="flex gap-20 my-10">
+      <Button onClick={getUserOpbyHash}>Get User Op by hash</Button>
+      <Button onClick={getDetail}>Get Details</Button>
+      <Button onClick={getGasPrice}>Get Gas price on opbnb</Button>
+      <Button onClick={getTxnbyHash}>Get Txn based on hash</Button>
+      <Button onClick={getGasCost}>Get Gas cost on opbnb</Button>
+      <Button onClick={getEthCost}>Get Gas cost on ETH</Button>
+      </div>
+
+      {apiResponse && (
+        <div className="api-response">
+          <pre>{JSON.stringify(apiResponse, null, 2)}</pre>
+        </div>
+      )}
     </main>
   );
 }
