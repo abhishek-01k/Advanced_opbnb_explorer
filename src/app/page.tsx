@@ -1,4 +1,5 @@
 "use client"
+import { GasCard } from "@/components/GasCard";
 import GasComparison from "@/components/gascomparison/page";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -147,14 +148,13 @@ export default function Home() {
   return (
     <main className=" flex flex-col gap-4">
 
-      <GasComparison />
 
-
+    <GasCard />
       <div className="flex w-full max-w-2xl items-center space-x-2">
         <Input onChange={(e) => setTxId(e.target.value)} type="text" placeholder="Enter Transaction" />
         <Button onClick={handleTxSearch}>Search</Button>
       </div>
-      
+
       <button onClick={getUserOpbyHash}>Get User Op by hash</button>
       <button onClick={getDetail}>Get Details</button>
       <button onClick={getGasPrice}>Get Gas price on opbnb</button>
