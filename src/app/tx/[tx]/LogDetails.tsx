@@ -1,5 +1,4 @@
 import { Separator } from '@/components/ui/separator';
-import { getBytes } from 'ethers';
 import React from 'react';
 
 const LogDetails = ({
@@ -33,7 +32,7 @@ const LogDetails = ({
 
             <div className='flex flex-col gap-4'>
 
-                {logs.map((log) => (
+                {logs.map((log : any) => (
                     <>
                         <div className='flex mb-4'>
                             <div className='border border-gray-700 rounded-full px-[10px] py-[7px]'>
@@ -49,7 +48,7 @@ const LogDetails = ({
                             <div className='flex flex-row gap-2'>
                                 <div>Topics:</div>
                                 <div className='flex flex-col gap-2'>
-                                    {log.topics.map((topic, index) => (
+                                    {log.topics.map((topic : any, index : any)  => (
                                         <div key={index} className='flex flex-row gap-2 items-center'>
                                             <div className='px-[8px] py-[2px] border-solid border border-gray-300 rounded-lg'>{index}:</div>
                                             <div className='text-muted-foreground'>{topic}</div>

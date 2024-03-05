@@ -24,7 +24,7 @@ const GasComparison = () => {
             .then(response => {
                 console.log(response)
                 const { result } = response;
-                const number = ethers.formatEther(result);
+                const number = ethers.utils.formatEther(result);
                 console.log("Response", parseInt(result), number);
                 setOpGas(number)
                 setCurrentTime(new Date());
@@ -45,7 +45,7 @@ const GasComparison = () => {
                 console.log("Response", parseInt(response.result));
                 console.log(response)
                 const { result } = response;
-                const number = ethers.formatEther(result);
+                const number = ethers.utils.formatEther(result);
                 console.log("Response", parseInt(result), number);
                 setGasPolygon(number);
                 setPolygonTime(new Date());
@@ -65,7 +65,7 @@ const GasComparison = () => {
             .then(response => {
                 console.log(response)
                 const { result } = response;
-                const number = ethers.formatEther(result);
+                const number = ethers.utils.formatEther(result);
                 console.log("Response", parseInt(result), number);
                 setGasOptimisim(number);
                 setOpmTime(new Date());

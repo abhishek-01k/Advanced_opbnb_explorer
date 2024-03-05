@@ -58,7 +58,9 @@ const TxPage = ({ params }: any) => {
                 </aside>
                 {data && (
                     <div className="">
+                        {/* @ts-ignore */}
                         {activeState === 1 && <TransactionDetails data={data} logs={data?.logs} />}
+                            {/* @ts-ignore */}
                         {activeState === 2 && <LogDetails logs={data?.logs} data={data} />}
                     </div>
                 )}
