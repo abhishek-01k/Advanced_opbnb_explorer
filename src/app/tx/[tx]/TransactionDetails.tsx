@@ -104,7 +104,7 @@ const TransactionDetails = ({ data, logs }: any) => {
         {useropsender && (
           <div className="flex flex-row gap-6 justify-between">
             <p className="text-muted-foreground">Sender</p>
-            <p>{ethers.utils.formatUnits(useropsender)}</p>
+            <p>{useropsender}</p>
           </div>
         )}
       </div>
