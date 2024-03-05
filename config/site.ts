@@ -5,10 +5,7 @@ export const siteConfig = {
   description:
     "OPBNB Advanced Analytics Explorer",
   mainNav: [
-    {
-      title: "Gas Comparison",
-      href: "/gascomparison",
-    }
+
   ],
   links: {
     twitter: "https://twitter.com/opbnbexplorer",

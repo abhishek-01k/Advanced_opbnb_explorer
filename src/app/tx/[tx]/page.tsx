@@ -1,7 +1,6 @@
 "use client"
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import Data from "@/tx.json";
 import { Separator } from '@/components/ui/separator';
 import Sidebar from '@/components/Sidebar';
 import LogDetails from './LogDetails';
@@ -13,7 +12,7 @@ const TxPage = ({ params }: any) => {
     const { tx } = params;
 
     const [activeState, setActiveState] = useState<number>(1);
-    const [data, setData] = useState(Data);
+    const [data, setData] = useState();
 
     const getDetail = async (tx: string) => {
 
@@ -31,6 +30,7 @@ const TxPage = ({ params }: any) => {
         const res = await fetch('https://bsc-testnet.nodereal.io/v1/64a9df0874fb4a93b9d0a3849de012d3', options)
             .then(response => response.json())
             .then(response => {
+                console.log("Response", response);
                 setData(response.result);
             })
             .catch(err => console.error(err));
@@ -56,10 +56,12 @@ const TxPage = ({ params }: any) => {
                 <aside className="mx-4 min-w-[150px]">
                     <Sidebar setActiveState={setActiveState} activeState={activeState} />
                 </aside>
-                <div className="">
-                    {activeState === 1 && <TransactionDetails data={data} logs={data.logs} />}
-                    {activeState === 2 && <LogDetails logs={data.logs} data={data} />}
-                </div>
+                {data && (
+                    <div className="">
+                        {activeState === 1 && <TransactionDetails data={data} logs={data?.logs} />}
+                        {activeState === 2 && <LogDetails logs={data?.logs} data={data} />}
+                    </div>
+                )}
 
             </div>
         </div>
