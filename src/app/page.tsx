@@ -153,20 +153,14 @@ const iframeUrls = [
   const handleTxSearch = () => {
     if (!txId) return
 
-    console.log("Tx Id: " + txId);
-    console.log("router " + router);
-
     router.push(`tx/${txId}`);
   }
 
 
   return (
-    <main className=" flex flex-col gap-4">
-
-
-    <GasCard />
-      <div className="flex w-full max-w-2xl items-center space-x-2">
-        <Input onChange={(e) => setTxId(e.target.value)} type="text" placeholder="Enter Transaction" />
+    <main className=" flex flex-col gap-4 items-center mx-8 mt-8">
+      <div className="flex w-full max-w-2xl items-center space-x-2 my-4 mb-8">
+        <Input className="h-[50px]" onChange={(e) => setTxId(e.target.value)} type="text" placeholder="Enter Transaction hash" />
         <Button onClick={handleTxSearch}>Search</Button>
       </div>
 
