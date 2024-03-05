@@ -27,6 +27,21 @@ export default function Home() {
     })
   };
 
+//   opbnb events - https://covalent-embed.vercel.app/card_6d8a1173d4a74a85aeb743626d7?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33
+// avg txn count - https://covalent-embed.vercel.app/card_c8dc0f323b1244018e0ebd1b354?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33
+// monthly active - https://covalent-embed.vercel.app/card_fa5fc20223b748a2805c9172a86?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33
+// failing - https://covalent-embed.vercel.app/card_aaec2e41b3b14158bda242b9ab8?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33
+// mau vs - https://covalent-embed.vercel.app/card_17027896cc9848ba8c905fee08e?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33
+// persec- https://covalent-embed.vercel.app/card_6a63b73879a142b684ad37d2644?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33
+
+const iframeUrls = [
+  "https://covalent-embed.vercel.app/card_17027896cc9848ba8c905fee08e?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33",
+  "https://covalent-embed.vercel.app/card_b0fc55f2a8524c099910064ad43?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33",
+  "https://covalent-embed.vercel.app/card_c8dc0f323b1244018e0ebd1b354?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33",
+  "https://covalent-embed.vercel.app/card_fa5fc20223b748a2805c9172a86?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33",
+  "https://covalent-embed.vercel.app/card_aaec2e41b3b14158bda242b9ab8?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33",
+  "https://covalent-embed.vercel.app/card_6a63b73879a142b684ad37d2644?embed=356c2827223a2b3c6c74282f223d2b626c2d262f27203d6c741513626c2f29296c746c2a2f2722376c626c3c2f20292b6c746c222f3d3a113f3b2f3c3a2b3c6c33",
+];
   const getUserOpbyHash = async () => {
 
     const options = {
@@ -155,6 +170,21 @@ export default function Home() {
         <Button onClick={handleTxSearch}>Search</Button>
       </div>
 
+      {/* Grid layout for iframes */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {iframeUrls.map((url, index) => (
+          <div key={index} className="rounded-lg overflow-hidden shadow-lg">
+            <iframe
+              src={url}
+              width="100%"
+              height="400"
+              style={{ border: "none" }}
+              title={`Embedded Card ${index + 1}`}
+            ></iframe>
+          </div>
+        ))}
+      </div>
+    
       <button onClick={getUserOpbyHash}>Get User Op by hash</button>
       <button onClick={getDetail}>Get Details</button>
       <button onClick={getGasPrice}>Get Gas price on opbnb</button>
