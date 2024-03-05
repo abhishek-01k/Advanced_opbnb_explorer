@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 const TransactionDetails = ({ data, logs }: any) => {
   console.log(data, "data");
-  const gasPrice = ethers.formatEther(data?.effectiveGasPrice);
+  const gasPrice = ethers.utils.formatEther(data?.effectiveGasPrice);
   console.log(`Gas Price: ${gasPrice}`);
   const [useropsuccess, setUseropuccess] = useState<boolean>(false);
   const [actualGasCost, setActualGasCost] = useState<number>();
@@ -104,7 +104,7 @@ const TransactionDetails = ({ data, logs }: any) => {
         {useropsender && (
           <div className="flex flex-row gap-6 justify-between">
             <p className="text-muted-foreground">Sender</p>
-            <p>{useropsender}</p>
+            <p>{ethers.utils.getAddress(useropsender)}</p>
           </div>
         )}
       </div>
